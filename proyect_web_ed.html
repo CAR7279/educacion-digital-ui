@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Educación Digital | UNNOBA</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#f0f9ff',
+              100: '#e0f2fe',
+              500: '#0ea5e9',
+              600: '#00A3E0', // Celeste institucional UNNOBA
+              700: '#0284c7',
+              900: '#0c4a6e',
+            }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+
+<body class="bg-white text-slate-800 font-sans antialiased selection:bg-brand-100 selection:text-brand-700 relative overflow-x-hidden">
+
+  <!-- ================= NAVBAR (ALTURA OPTIMIZADA PARA LOGOS MÁS GRANDES) ================= -->
+  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 sm:h-24 flex items-center justify-between">
+
+      <!-- LOGOS (Izquierda con dimensiones ampliadas proporcionalmente) -->
+      <div class="flex items-center space-x-3.5 sm:space-x-5 md:space-x-6">
+        <!-- Logo 1: Educación Digital -->
+        <a href="https://educaciondigital.unnoba.edu.ar" class="flex items-center hover:opacity-85 transition">
+          <img 
+            src="https://educaciondigital.unnoba.edu.ar/wp-content/uploads/cropped-marca_E-DIGITAL_marca_ED_web-300x159.png" 
+            alt="Educación Digital" 
+            class="h-10 sm:h-12 md:h-14 w-auto object-contain transition-all"
+          >
+        </a>
+
+        <!-- Divisor vertical -->
+        <div class="h-7 sm:h-9 md:h-10 w-[1.5px] bg-slate-200"></div>
+
+        <!-- Logo 2: UNNOBA -->
+        <a href="https://www.unnoba.edu.ar" target="_blank" rel="noopener noreferrer" class="flex items-center hover:opacity-85 transition">
+          <img 
+            src="https://cedi.unnoba.edu.ar/wp-content/uploads/marca2.png" 
+            alt="UNNOBA" 
+            class="h-7 sm:h-9 md:h-11 w-auto object-contain transition-all"
+          >
+        </a>
+      </div>
+
+      <!-- BOTONES Y ACCIONES (Derecha) -->
+      <div class="flex items-center space-x-2 sm:space-x-4">
+        <!-- Solicitud Aulas (visible únicamente en desktop) -->
+        <a href="#solicitud-aulas" class="hidden md:inline-flex items-center px-4 py-2 border border-slate-200 rounded-full text-xs font-semibold text-slate-700 hover:border-brand-600 hover:text-brand-600 transition bg-white shadow-sm">
+          <i data-lucide="layout-grid" class="w-3.5 h-3.5 mr-1.5 text-brand-600"></i>
+          Solicitud AULAS
+        </a>
+
+        <!-- Plataforma (visible únicamente en desktop) -->
+        <a href="https://plataformaed.unnoba.edu.ar" target="_blank" rel="noopener noreferrer" class="hidden md:inline-flex items-center px-5 py-2.5 rounded-full text-xs font-semibold text-white bg-brand-600 hover:bg-brand-700 transition shadow-md shadow-brand-600/20">
+          <i data-lucide="log-in" class="w-3.5 h-3.5 mr-1.5"></i>
+          PLATAFORMA
+        </a>
+
+        <!-- Botón Menú Hamburguesa -->
+        <button onclick="toggleNavMenu()" class="p-2 sm:p-2.5 rounded-xl text-slate-600 hover:text-brand-600 hover:bg-slate-50 transition" aria-label="Abrir Menú">
+          <i data-lucide="menu" class="w-6 h-6"></i>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ================= MENÚ HAMBURGUESA DESPLEGABLE (ACOTADO / AUTO-ALTURA) ================= -->
+  <div id="navMenuOverlay" class="fixed inset-0 bg-slate-950/40 backdrop-blur-sm z-50 opacity-0 pointer-events-none transition-opacity duration-300" onclick="toggleNavMenu()"></div>
+
+  <div id="navMenuDrawer" class="fixed top-3 right-3 sm:top-5 sm:right-6 w-[290px] sm:w-80 max-w-[90vw] h-auto bg-white z-50 shadow-2xl rounded-3xl border border-slate-100 flex flex-col p-5 sm:p-6 transform translate-x-[120%] transition-transform duration-300 ease-in-out">
+    <div>
+      <!-- Cabecera del Menú -->
+      <div class="flex items-center justify-between pb-3 sm:pb-4 border-b border-slate-100">
+        <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Navegación</span>
+        <button onclick="toggleNavMenu()" class="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition" aria-label="Cerrar Menú">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <!-- Opciones solicitadas -->
+      <nav class="mt-4 flex flex-col space-y-1">
+        <a href="#" class="px-3.5 py-2.5 rounded-xl font-semibold text-sm text-slate-800 hover:text-brand-600 hover:bg-brand-50/70 transition flex items-center justify-between group">
+          <span>Educación Digital</span>
+          <i data-lucide="chevron-right" class="w-4 h-4 text-slate-300 group-hover:text-brand-600 group-hover:translate-x-0.5 transition-all"></i>
+        </a>
+
+        <a href="#" class="px-3.5 py-2.5 rounded-xl font-semibold text-sm text-slate-800 hover:text-brand-600 hover:bg-brand-50/70 transition flex items-center justify-between group">
+          <span>Propuestas</span>
+          <i data-lucide="chevron-right" class="w-4 h-4 text-slate-300 group-hover:text-brand-600 group-hover:translate-x-0.5 transition-all"></i>
+        </a>
+
+        <a href="#" class="px-3.5 py-2.5 rounded-xl font-semibold text-sm text-slate-800 hover:text-brand-600 hover:bg-brand-50/70 transition flex items-center justify-between group">
+          <span>Recursos</span>
+          <i data-lucide="chevron-right" class="w-4 h-4 text-slate-300 group-hover:text-brand-600 group-hover:translate-x-0.5 transition-all"></i>
+        </a>
+
+        <a href="#" class="px-3.5 py-2.5 rounded-xl font-semibold text-sm text-slate-800 hover:text-brand-600 hover:bg-brand-50/70 transition flex items-center justify-between group">
+          <span>Normativa</span>
+          <i data-lucide="chevron-right" class="w-4 h-4 text-slate-300 group-hover:text-brand-600 group-hover:translate-x-0.5 transition-all"></i>
+        </a>
+
+        <a href="#" class="px-3.5 py-2.5 rounded-xl font-semibold text-sm text-slate-800 hover:text-brand-600 hover:bg-brand-50/70 transition flex items-center justify-between group">
+          <span>Certificaciones</span>
+          <i data-lucide="chevron-right" class="w-4 h-4 text-slate-300 group-hover:text-brand-600 group-hover:translate-x-0.5 transition-all"></i>
+        </a>
+      </nav>
+    </div>
+
+    <!-- Accesos rápidos visibles únicamente en móvil -->
+    <div class="pt-4 mt-2 border-t border-slate-100 space-y-2 block md:hidden">
+      <a href="#solicitud-aulas" onclick="toggleNavMenu()" class="w-full flex items-center justify-center py-2.5 rounded-xl border border-slate-200 text-xs font-bold text-slate-700 hover:border-brand-600 hover:text-brand-600 transition">
+        <i data-lucide="layout-grid" class="w-3.5 h-3.5 mr-2 text-brand-600"></i>
+        Solicitud AULAS
+      </a>
+      <a href="https://plataformaed.unnoba.edu.ar" target="_blank" class="w-full flex items-center justify-center py-2.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white text-xs font-bold transition shadow-sm">
+        <i data-lucide="log-in" class="w-3.5 h-3.5 mr-2"></i>
+        Ingresar a PLATAFORMA
+      </a>
+    </div>
+  </div>
+
+  <main>
+    <!-- ================= SLIDER HERO (TRANSICIÓN INFINITA) ================= -->
+    <section class="relative w-full h-[60vh] min-h-[460px] md:h-[76vh] md:min-h-[520px] md:max-h-[720px] overflow-hidden bg-slate-950">
+      
+      <!-- Imagen 1 -->
+      <img 
+        id="slide-img-0"
+        src="https://educaciondigital.unnoba.edu.ar/wp-content/uploads/FOTO3.jpg" 
+        alt="Educación Digital UNNOBA - Slide 1" 
+        class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out opacity-100 scale-105"
+      >
+
+      <!-- Imagen 2 -->
+      <img 
+        id="slide-img-1"
+        src="https://educaciondigital.unnoba.edu.ar/wp-content/uploads/FOTO4.jpg" 
+        alt="Educación Digital UNNOBA - Slide 2" 
+        class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out opacity-0 scale-105"
+      >
+
+      <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/45 to-transparent"></div>
+
+      <!-- Textos del Slider -->
+      <div class="relative z-10 max-w-4xl mx-auto h-full flex flex-col justify-end pb-12 sm:pb-16 px-5 sm:px-6 text-center items-center">
+        <h1 class="text-2xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-tight drop-shadow-sm uppercase">
+          EDUCACION DIGITAL
+        </h1>
+
+        <p class="mt-2.5 sm:mt-3.5 text-xs sm:text-base text-slate-200 max-w-2xl font-light drop-shadow leading-relaxed">
+          Es un área dependiente de Secretaría Académica de la UNNOBA, cuyo propósito es promover la educación digital con propuestas basadas en el principio de la calidad, la innovación y la inclusión.
+        </p>
+
+        <!-- Indicadores interactivos -->
+        <div class="flex items-center space-x-2.5 mt-6 sm:mt-8">
+          <button id="dot-0" onclick="goToSlide(0)" class="w-8 sm:w-9 h-1.5 rounded-full bg-brand-600 transition-all duration-300" aria-label="Foto 1"></button>
+          <button id="dot-1" onclick="goToSlide(1)" class="w-2 sm:w-2.5 h-1.5 rounded-full bg-white/40 hover:bg-white/80 transition-all duration-300" aria-label="Foto 2"></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= BARRA DE PERFILES (2x2 en móvil / 4 cols en desktop) ================= -->
+    <section class="max-w-6xl mx-auto px-4 sm:px-6 -mt-6 sm:-mt-8 relative z-20">
+      <div class="bg-white rounded-2xl shadow-xl shadow-slate-200/70 border border-slate-100 p-2 sm:p-3">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-3 text-center">
+          
+          <!-- DOCENTES (Filete #584E98) -->
+          <a href="#docentes" class="group py-3 px-2 sm:py-3.5 sm:px-3 rounded-xl border border-[#584E98] bg-white transition-all duration-300 flex flex-col items-center hover:bg-[#584E98] hover:border-[#584E98] hover:shadow-md">
+            <span class="text-xs sm:text-sm font-bold text-[#584E98] group-hover:text-white tracking-wider transition-colors duration-200">DOCENTES</span>
+            <span class="text-[10px] sm:text-[11px] text-slate-500 group-hover:text-white/90 font-normal mt-0.5 transition-colors duration-200">Gestión de aulas y recursos</span>
+          </a>
+
+          <!-- ALUMNOS (Filete #E19D00) -->
+          <a href="#alumnos" class="group py-3 px-2 sm:py-3.5 sm:px-3 rounded-xl border border-[#E19D00] bg-white transition-all duration-300 flex flex-col items-center hover:bg-[#E19D00] hover:border-[#E19D00] hover:shadow-md">
+            <span class="text-xs sm:text-sm font-bold text-[#E19D00] group-hover:text-white tracking-wider transition-colors duration-200">ALUMNOS</span>
+            <span class="text-[10px] sm:text-[11px] text-slate-500 group-hover:text-white/90 font-normal mt-0.5 transition-colors duration-200">Acceso a cursada y guías</span>
+          </a>
+
+          <!-- GRADUADOS (Filete #AD0E40) -->
+          <a href="#graduados" class="group py-3 px-2 sm:py-3.5 sm:px-3 rounded-xl border border-[#AD0E40] bg-white transition-all duration-300 flex flex-col items-center hover:bg-[#AD0E40] hover:border-[#AD0E40] hover:shadow-md">
+            <span class="text-xs sm:text-sm font-bold text-[#AD0E40] group-hover:text-white tracking-wider transition-colors duration-200">GRADUADOS</span>
+            <span class="text-[10px] sm:text-[11px] text-slate-500 group-hover:text-white/90 font-normal mt-0.5 transition-colors duration-200">Formación de posgrado</span>
+          </a>
+
+          <!-- NODOCENTES (Filete #45a4d3) -->
+          <a href="#nodocentes" class="group py-3.5 px-2 sm:py-3.5 sm:px-3 rounded-xl border border-[#45a4d3] bg-white transition-all duration-300 flex flex-col items-center hover:bg-[#45a4d3] hover:border-[#45a4d3] hover:shadow-md">
+            <span class="text-xs sm:text-sm font-bold text-[#45a4d3] group-hover:text-white tracking-wider transition-colors duration-200">NODOCENTES</span>
+            <span class="text-[10px] sm:text-[11px] text-slate-500 group-hover:text-white/90 font-normal mt-0.5 transition-colors duration-200">Capacitación institucional</span>
+          </a>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= ACCESOS RÁPIDOS ================= -->
+    <section class="py-12 sm:py-20 bg-slate-50/60">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6">
+        <div class="text-center mb-8 sm:mb-12">
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Accesos Rápidos</h2>
+          <div class="w-8 sm:w-10 h-1 bg-brand-600 mx-auto mt-2 rounded-full"></div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
+          <a href="https://educaciondigital.unnoba.edu.ar" class="group bg-white p-6 sm:p-8 rounded-2xl border border-slate-100 shadow-sm hover:shadow-lg hover:-translate-y-1 transition duration-200 flex flex-col items-center text-center">
+            <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-brand-50 text-brand-600 flex items-center justify-center mb-3 sm:mb-4 group-hover:scale-110 transition">
+              <i data-lucide="graduation-cap" class="w-6 h-6 sm:w-7 sm:h-7"></i>
+            </div>
+            <h3 class="font-bold text-slate-800 text-base sm:text-lg mb-1 group-hover:text-brand-600 transition">Capacitaciones</h3>
+            <p class="text-xs text-slate-500 leading-relaxed">Microcharlas, talleres docentes y carreras a distancia bajo el modelo SIEDD.</p>
+          </a>
+
+          <a href="https://wite.unnoba.edu.ar" class="group bg-white p-6 sm:p-8 rounded-2xl border border-slate-100 shadow-sm hover:shadow-lg hover:-translate-y-1 transition duration-200 flex flex-col items-center text-center">
+            <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-brand-50 text-brand-600 flex items-center justify-center mb-3 sm:mb-4 group-hover:scale-110 transition">
+              <i data-lucide="award" class="w-6 h-6 sm:w-7 sm:h-7"></i>
+            </div>
+            <h3 class="font-bold text-slate-800 text-base sm:text-lg mb-1 group-hover:text-brand-600 transition">Certificados</h3>
+            <p class="text-xs text-slate-500 leading-relaxed">Consulta y descarga directa de certificados con DNI y correo electrónico.</p>
+          </a>
+
+          <a href="https://educaciondigital.unnoba.edu.ar" class="group bg-white p-6 sm:p-8 rounded-2xl border border-slate-100 shadow-sm hover:shadow-lg hover:-translate-y-1 transition duration-200 flex flex-col items-center text-center">
+            <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-brand-50 text-brand-600 flex items-center justify-center mb-3 sm:mb-4 group-hover:scale-110 transition">
+              <i data-lucide="server" class="w-6 h-6 sm:w-7 sm:h-7"></i>
+            </div>
+            <h3 class="font-bold text-slate-800 text-base sm:text-lg mb-1 group-hover:text-brand-600 transition">Gestión de Aulas</h3>
+            <p class="text-xs text-slate-500 leading-relaxed">Solicitud de apertura de comisiones, migración de contenidos y soporte EVEA.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= NOTICIAS DESTACADAS ================= -->
+    <section class="py-12 sm:py-20 bg-white">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6">
+        <div class="text-center mb-8 sm:mb-12">
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Noticias Destacadas</h2>
+          <div class="w-8 sm:w-10 h-1 bg-brand-600 mx-auto mt-2 rounded-full"></div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
+          <article class="bg-white rounded-2xl border border-slate-200/80 p-4 sm:p-5 shadow-sm hover:shadow-lg transition duration-300 flex items-center justify-between space-x-3 sm:space-x-4">
+            <div class="flex-1">
+              <span class="text-[10px] font-bold text-brand-600 uppercase tracking-widest">Inteligencia Artificial</span>
+              <h3 class="text-xs sm:text-sm font-bold text-slate-800 mt-1 line-clamp-2 leading-snug hover:text-brand-600 transition">
+                Herramientas generativas para el aula: Canva, ChatGPT y Google Gemini
+              </h3>
+              <p class="text-[10px] sm:text-[11px] text-slate-400 mt-2">Recursos docentes</p>
+            </div>
+            <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-xl overflow-hidden bg-slate-100 flex-shrink-0">
+              <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=300&q=80" alt="IA" class="w-full h-full object-cover">
+            </div>
+          </article>
+
+          <article class="bg-white rounded-2xl border border-slate-200/80 p-4 sm:p-5 shadow-sm hover:shadow-lg transition duration-300 flex items-center justify-between space-x-3 sm:space-x-4">
+            <div class="flex-1">
+              <span class="text-[10px] font-bold text-brand-600 uppercase tracking-widest">Encuentros</span>
+              <h3 class="text-xs sm:text-sm font-bold text-slate-800 mt-1 line-clamp-2 leading-snug hover:text-brand-600 transition">
+                WITE: Workshop de Innovación y Transformación Educativa
+              </h3>
+              <p class="text-[10px] sm:text-[11px] text-slate-400 mt-2">Narrativas docentes</p>
+            </div>
+            <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-xl overflow-hidden bg-slate-100 flex-shrink-0">
+              <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=300&q=80" alt="WITE" class="w-full h-full object-cover">
+            </div>
+          </article>
+
+          <article class="bg-white rounded-2xl border border-slate-200/80 p-4 sm:p-5 shadow-sm hover:shadow-lg transition duration-300 flex items-center justify-between space-x-3 sm:space-x-4">
+            <div class="flex-1">
+              <span class="text-[10px] font-bold text-brand-600 uppercase tracking-widest">Propuesta CAVILA</span>
+              <h3 class="text-xs sm:text-sm font-bold text-slate-800 mt-1 line-clamp-2 leading-snug hover:text-brand-600 transition">
+                Diseño de aulas iconográficas y realidad aumentada en la universidad
+              </h3>
+              <p class="text-[10px] sm:text-[11px] text-slate-400 mt-2">Escuela Virtual</p>
+            </div>
+            <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-xl overflow-hidden bg-slate-100 flex-shrink-0">
+              <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=300&q=80" alt="CAVILA" class="w-full h-full object-cover">
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= OBSERVATORIO (OTIE) ================= -->
+    <section class="py-10 sm:py-12 bg-slate-50/70 border-t border-slate-100">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6">
+        <div class="text-center mb-6">
+          <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">Observatorio (OTIE)</h2>
+          <div class="w-8 h-1 bg-brand-600 mx-auto mt-2 rounded-full"></div>
+        </div>
+
+        <div class="bg-white rounded-2xl p-5 sm:p-8 border border-slate-100 shadow-sm flex flex-col md:flex-row items-center justify-between gap-4 sm:gap-6">
+          <div class="text-center md:text-left">
+            <span class="text-[10px] sm:text-[11px] font-bold text-brand-600 uppercase tracking-wider">SIEDD · UNNOBA</span>
+            <h3 class="text-base sm:text-lg font-bold text-slate-800 mt-1">Observatorio de Tecnologías e Innovación Educativa</h3>
+            <p class="text-xs text-slate-500 mt-1 max-w-xl">Monitoreo, análisis y divulgación de tecnologías emergentes en la educación universitaria.</p>
+          </div>
+          <a href="https://educaciondigital.unnoba.edu.ar" class="w-full md:w-auto text-center px-5 py-2.5 rounded-full text-xs font-semibold text-brand-600 border border-brand-600 hover:bg-brand-50 transition whitespace-nowrap">
+            Explorar el OTIE →
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= IA Y EDUCACIÓN ================= -->
+    <section class="py-10 sm:py-12 bg-white">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6">
+        <div class="text-center mb-6">
+          <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">IA y Educación</h2>
+          <div class="w-8 h-1 bg-brand-600 mx-auto mt-2 rounded-full"></div>
+        </div>
+
+        <div class="bg-gradient-to-r from-brand-50/60 to-white rounded-2xl p-5 sm:p-8 border border-brand-100 shadow-sm flex flex-col md:flex-row items-center justify-between gap-4 sm:gap-6">
+          <div class="text-center md:text-left">
+            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-brand-600 text-white uppercase tracking-wider mb-2">
+              Línea Estratégica
+            </span>
+            <h3 class="text-base sm:text-lg font-bold text-slate-800">Ecosistema de Inteligencia Artificial para el Aprendizaje</h3>
+            <p class="text-xs text-slate-500 mt-1 max-w-xl">Guías metodológicas, asistentes conversacionales y lineamientos éticos para la comunidad universitaria.</p>
+          </div>
+          <a href="https://educaciondigital.unnoba.edu.ar" class="w-full md:w-auto text-center px-6 py-2.5 rounded-full text-xs font-semibold text-white bg-slate-900 hover:bg-slate-800 transition whitespace-nowrap shadow">
+            Ver Recursos de IA
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ================= FOOTER (CENTRADO EN MÓVIL / 3 COLS EN DESKTOP) ================= -->
+  <footer class="bg-[#2c2c2c] text-slate-300 pt-12 sm:pt-16 pb-10 sm:pb-12 border-t border-white/10 text-sm">
+    <div class="max-w-6xl mx-auto px-5 sm:px-6">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 sm:gap-10 pb-10 sm:pb-12 border-b border-white/10">
+
+        <!-- Oficina Virtual ED (centrado en móvil) -->
+        <div class="flex flex-col items-center text-center md:flex-row md:items-start md:text-left gap-3 sm:gap-4">
+          <img 
+            src="https://educaciondigital.unnoba.edu.ar/wp-content/uploads/oficinavirtualed.png" 
+            alt="Icono Oficina Virtual ED" 
+            class="w-12 h-12 sm:w-14 sm:h-14 object-contain flex-shrink-0"
+          >
+          <div class="space-y-2">
+            <h4 class="text-white font-bold text-sm tracking-wider uppercase">Oficina Virtual ED</h4>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Días y horarios de atención:<br>
+              <strong class="text-white">De Lunes a Viernes de 9 a 12 h.</strong><br>
+              La oficina posee sala de espera.
+            </p>
+            <div class="pt-1 flex justify-center md:justify-start">
+              <a href="https://educaciondigital.unnoba.edu.ar" target="_blank" rel="noopener noreferrer" class="inline-flex items-center px-4 py-2 rounded-lg bg-brand-600 hover:bg-brand-700 text-white text-xs font-semibold transition">
+                <i data-lucide="video" class="w-3.5 h-3.5 mr-2 text-white"></i>
+                INGRESE AQUÍ
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contacto (centrado en móvil) -->
+        <div class="space-y-2.5 text-center md:text-left">
+          <h4 class="text-white font-bold text-sm tracking-wider uppercase">Contacto</h4>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            <strong class="text-white">Educación Digital – UNNOBA</strong><br>
+            Sarmiento 1169 (B6002CJI)<br>
+            Junín, Buenos Aires, Argentina
+          </p>
+          <div class="text-xs text-slate-300 space-y-1">
+            <p><span class="text-slate-400">Tel:</span> <a href="tel:+5402364407750" class="hover:text-white transition">+54 0236 4407750</a></p>
+            <p><span class="text-slate-400">Mail:</span> <a href="mailto:educaciondigital@unnoba.edu.ar" class="text-brand-500 hover:underline">educaciondigital@unnoba.edu.ar</a></p>
+          </div>
+          <div class="pt-1 flex justify-center md:justify-start">
+            <a href="https://educaciondigital.unnoba.edu.ar" class="text-xs text-brand-500 font-semibold hover:underline">
+              FORMULARIO DE CONTACTO →
+            </a>
+          </div>
+        </div>
+
+        <!-- NUESTRAS REDES (5 iconos horizontales centrados en móvil) -->
+        <div class="space-y-3 text-center md:text-left">
+          <h4 class="text-white font-bold text-sm tracking-wider uppercase">Nuestras Redes</h4>
+          <p class="text-xs text-slate-300">Seguí las novedades y lanzamientos en nuestros canales oficiales:</p>
+          
+          <div class="flex items-center justify-center md:justify-start space-x-4 pt-1">
+            
+            <!-- Facebook -->
+            <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" class="text-white hover:text-brand-500 transition-all duration-200" title="Facebook">
+              <svg class="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2.5" y="2.5" width="19" height="19" rx="5"></rect>
+                <path d="M14 9h2V6.5h-2c-2 0-3.5 1.5-3.5 3.5V12H8.5v2.5H10.5V21.5h3V14.5h2l.5-2.5h-2.5V10c0-.6.4-1 1-1z"></path>
+              </svg>
+            </a>
+
+            <!-- YouTube -->
+            <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer" class="text-white hover:text-brand-500 transition-all duration-200" title="YouTube">
+              <svg class="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="4" width="20" height="16" rx="4.5"></rect>
+                <polygon points="10 8.5 15.5 12 10 15.5 10 8.5"></polygon>
+              </svg>
+            </a>
+
+            <!-- Instagram -->
+            <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" class="text-white hover:text-brand-500 transition-all duration-200" title="Instagram">
+              <svg class="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2.5" y="2.5" width="19" height="19" rx="5"></rect>
+                <circle cx="12" cy="12" r="4.2"></circle>
+                <circle cx="16.5" cy="7.5" r="1.1" fill="currentColor" stroke="none"></circle>
+              </svg>
+            </a>
+
+            <!-- LinkedIn -->
+            <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" class="text-white hover:text-brand-500 transition-all duration-200" title="LinkedIn">
+              <svg class="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="4.5" cy="4.5" r="1.75"></circle>
+                <rect x="2.5" y="8.5" width="4" height="12.5" rx="0.5"></rect>
+                <path d="M10 8.5h3.8v1.8c.8-1.2 2.2-2 4.2-2 3.5 0 5 2.2 5 5.7V21h-3.8v-5.8c0-1.6-.7-2.7-2-2.7-1.4 0-2.2 1-2.2 2.7V21H10V8.5z"></path>
+              </svg>
+            </a>
+
+            <!-- X -->
+            <a href="https://x.com" target="_blank" rel="noopener noreferrer" class="text-white hover:text-brand-500 transition-all duration-200" title="X">
+              <svg class="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2.5" y="2.5" width="19" height="19" rx="5"></rect>
+                <path d="M7 6.5h2.5l3.2 4.2 3.8-4.2H18l-5 5.5 5.5 6.5h-2.5l-3.5-4.2-4 4.2H6.5l5.2-5.5L7 6.5z"></path>
+              </svg>
+            </a>
+
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Copyright centrado -->
+      <div class="pt-6 sm:pt-8 text-center text-xs text-slate-400">
+        <p>© 2026 Educación Digital – UNNOBA.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ================= ASISTENTE ED (INICIA SIEMPRE MINIMIZADO EN DESKTOP Y MÓVIL) ================= -->
+  <div class="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 flex flex-col items-end">
+    
+    <!-- Ventana del Asistente (Oculta por defecto en todas las pantallas) -->
+    <div id="botCard" class="hidden w-[calc(100vw-2rem)] max-w-[310px] sm:max-w-[320px] bg-white rounded-3xl shadow-2xl border border-slate-100 p-4 sm:p-5 mb-2.5 transition-all duration-300 transform origin-bottom-right">
+      
+      <!-- Encabezado -->
+      <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+        <div class="flex items-center space-x-2.5 sm:space-x-3">
+          <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-sky-50 border-2 border-sky-100 flex items-center justify-center text-brand-600 shadow-inner flex-shrink-0">
+            <svg class="w-5 h-5 sm:w-6 sm:h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="11" width="18" height="10" rx="2"></rect>
+              <circle cx="12" cy="5" r="2"></circle>
+              <path d="M12 7v4"></path>
+              <line x1="8" y1="16" x2="8" y2="16"></line>
+              <line x1="16" y1="16" x2="16" y2="16"></line>
+            </svg>
+          </div>
+          <div>
+            <h3 class="font-bold text-[#1e293b] text-sm leading-tight">Asistente ED</h3>
+            <span class="flex items-center text-[10px] text-slate-400 font-medium mt-0.5">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 mr-1.5 animate-pulse"></span>
+              Te orienta en Educación Digital
+            </span>
+          </div>
+        </div>
+
+        <button onclick="toggleBot()" class="text-slate-300 hover:text-slate-500 transition p-1" title="Minimizar">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+      <!-- Pregunta Central -->
+      <div class="pt-3.5 pb-2.5">
+        <p class="font-bold text-[#1e293b] text-xs">
+          ¿En qué te podemos ayudar?
+        </p>
+      </div>
+
+      <!-- Opciones -->
+      <div class="space-y-2">
+        
+        <!-- Aulas -->
+        <a href="#solicitud-aulas" class="w-full flex items-center justify-between p-2.5 sm:p-3 rounded-2xl border border-slate-100 hover:border-sky-200 bg-white hover:bg-sky-50/50 shadow-sm transition-all duration-200 group">
+          <div class="flex items-center space-x-2.5">
+            <div class="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-sky-50 text-sky-600 flex items-center justify-center flex-shrink-0">
+              <i data-lucide="graduation-cap" class="w-3.5 h-3.5 sm:w-4 sm:h-4"></i>
+            </div>
+            <span class="font-bold text-xs text-[#1e293b] group-hover:text-brand-600 transition-colors">Aulas</span>
+          </div>
+          <i data-lucide="chevron-right" class="w-4 h-4 text-slate-300 group-hover:text-brand-600 transition-all"></i>
+        </a>
+
+        <!-- Capacitación -->
+        <a href="https://educaciondigital.unnoba.edu.ar" target="_blank" class="w-full flex items-center justify-between p-2.5 sm:p-3 rounded-2xl border border-slate-100 hover:border-amber-200 bg-white hover:bg-amber-50/50 shadow-sm transition-all duration-200 group">
+          <div class="flex items-center space-x-2.5">
+            <div class="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-amber-50 text-amber-500 flex items-center justify-center flex-shrink-0">
+              <i data-lucide="bar-chart-2" class="w-3.5 h-3.5 sm:w-4 sm:h-4"></i>
+            </div>
+            <span class="font-bold text-xs text-[#1e293b] group-hover:text-amber-600 transition-colors">Capacitación</span>
+          </div>
+          <i data-lucide="chevron-right" class="w-4 h-4 text-slate-300 group-hover:text-amber-500 transition-all"></i>
+        </a>
+
+        <!-- Oficina virtual -->
+        <a href="https://educaciondigital.unnoba.edu.ar" target="_blank" class="w-full flex items-center justify-between p-2.5 sm:p-3 rounded-2xl border border-slate-100 hover:border-emerald-200 bg-white hover:bg-emerald-50/50 shadow-sm transition-all duration-200 group">
+          <div class="flex items-center space-x-2.5">
+            <div class="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center flex-shrink-0">
+              <i data-lucide="user" class="w-3.5 h-3.5 sm:w-4 sm:h-4"></i>
+            </div>
+            <span class="font-bold text-xs text-[#1e293b] group-hover:text-emerald-600 transition-colors">Oficina virtual</span>
+          </div>
+          <i data-lucide="chevron-right" class="w-4 h-4 text-slate-300 group-hover:text-emerald-600 transition-all"></i>
+        </a>
+
+      </div>
+    </div>
+
+    <!-- Botón disparador visible por defecto -->
+    <button id="botTrigger" onclick="toggleBot()" class="w-12 h-12 sm:w-13 sm:h-13 p-3 bg-brand-600 hover:bg-brand-700 text-white rounded-full shadow-lg shadow-brand-600/30 flex items-center justify-center transition-all duration-300 hover:scale-105" title="Abrir Asistente ED">
+      <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="11" width="18" height="10" rx="2"></rect>
+        <circle cx="12" cy="5" r="2"></circle>
+        <path d="M12 7v4"></path>
+        <line x1="8" y1="16" x2="8" y2="16"></line>
+        <line x1="16" y1="16" x2="16" y2="16"></line>
+      </svg>
+      <span class="absolute top-0 right-0 w-3 h-3 bg-emerald-400 border-2 border-white rounded-full"></span>
+    </button>
+
+  </div>
+
+  <!-- Scripts -->
+  <script>
+    lucide.createIcons();
+
+    // Slider Infinito
+    let currentSlide = 0;
+    const totalSlides = 2;
+    const intervalTime = 5000;
+
+    function goToSlide(index) {
+      currentSlide = index;
+
+      for (let i = 0; i < totalSlides; i++) {
+        const img = document.getElementById(`slide-img-${i}`);
+        const dot = document.getElementById(`dot-${i}`);
+
+        if (i === currentSlide) {
+          img.classList.remove('opacity-0');
+          img.classList.add('opacity-100');
+          dot.className = "w-8 sm:w-9 h-1.5 rounded-full bg-brand-600 transition-all duration-300";
+        } else {
+          img.classList.remove('opacity-100');
+          img.classList.add('opacity-0');
+          dot.className = "w-2 sm:w-2.5 h-1.5 rounded-full bg-white/40 hover:bg-white/80 transition-all duration-300";
+        }
+      }
+    }
+
+    setInterval(() => {
+      const nextSlide = (currentSlide + 1) % totalSlides;
+      goToSlide(nextSlide);
+    }, intervalTime);
+
+    // Menú Hamburguesa Drawer acotado
+    function toggleNavMenu() {
+      const overlay = document.getElementById('navMenuOverlay');
+      const drawer = document.getElementById('navMenuDrawer');
+      const isOpen = !drawer.classList.contains('translate-x-[120%]');
+
+      if (isOpen) {
+        drawer.classList.add('translate-x-[120%]');
+        overlay.classList.add('opacity-0');
+        setTimeout(() => overlay.classList.add('pointer-events-none'), 300);
+      } else {
+        overlay.classList.remove('pointer-events-none');
+        overlay.classList.remove('opacity-0');
+        drawer.classList.remove('translate-x-[120%]');
+      }
+    }
+
+    // Toggle Asistente ED (Inicia siempre minimizado en todas las pantallas)
+    function toggleBot() {
+      const card = document.getElementById('botCard');
+      const trigger = document.getElementById('botTrigger');
+
+      if (card.classList.contains('hidden')) {
+        card.classList.remove('hidden');
+        trigger.classList.add('hidden');
+      } else {
+        card.classList.add('hidden');
+        trigger.classList.remove('hidden');
+      }
+    }
+  </script>
+</body>
+</html>
